@@ -1,21 +1,39 @@
-// Uncomment the code below and write your tests
-// import { getBankAccount } from '.';
+import { BankAccount, getBankAccount } from '.';
+
+const TEST_BALANCE = 100;
+const OVER_BALANCE = 101;
 
 describe('BankAccount', () => {
   test('should create account with initial balance', () => {
-    // Write your test here
+    const myAccount = getBankAccount(TEST_BALANCE);
+    expect(myAccount).toBeInstanceOf(BankAccount);
   });
 
   test('should throw InsufficientFundsError error when withdrawing more than balance', () => {
-    // Write your test here
+    const myAccount = getBankAccount(TEST_BALANCE);
+    const overdraft = myAccount.withdraw.bind(myAccount, OVER_BALANCE);
+    expect(overdraft).toThrow(
+      `Insufficient funds: cannot withdraw more than ${TEST_BALANCE}`,
+    );
   });
 
   test('should throw error when transferring more than balance', () => {
-    // Write your test here
+    const myAccount = getBankAccount(TEST_BALANCE);
+    const otherAccount = getBankAccount(TEST_BALANCE);
+    const overdraft = myAccount.transfer.bind(
+      myAccount,
+      OVER_BALANCE,
+      otherAccount,
+    );
+    expect(overdraft).toThrow(
+      `Insufficient funds: cannot withdraw more than ${TEST_BALANCE}`,
+    );
   });
 
   test('should throw error when transferring to the same account', () => {
-    // Write your test here
+    const myAccount = getBankAccount(TEST_BALANCE);
+    const selfTransfer = myAccount.transfer.bind(myAccount, 50, myAccount);
+    expect(selfTransfer).toThrow('Transfer failed');
   });
 
   test('should deposit money', () => {
