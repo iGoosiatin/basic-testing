@@ -4,6 +4,7 @@ import {
   TransferFailedError,
   getBankAccount,
 } from '.';
+import lodash from 'lodash';
 
 const TEST_BALANCE = 100;
 const OVER_BALANCE = 101;
@@ -60,9 +61,14 @@ describe('BankAccount', () => {
   });
 
   test('fetchBalance should return number in case if request did not failed', async () => {
-    // const myAccount = getBankAccount(TEST_BALANCE);
-    // const result = await myAccount.fetchBalance();
-    // expect(result).toBe(null);
+    // Simulate successful fetch
+    jest
+      .spyOn(lodash, 'random')
+      .mockReturnValueOnce(NEW_BALANCE)
+      .mockReturnValueOnce(1);
+    const myAccount = getBankAccount(TEST_BALANCE);
+    const result = await myAccount.fetchBalance();
+    expect(typeof result).toBe('number');
   });
 
   test('should set new balance if fetchBalance returned number', async () => {
