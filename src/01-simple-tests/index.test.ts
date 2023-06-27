@@ -7,7 +7,7 @@ describe('simpleCalculator tests', () => {
   });
 
   test('should substract two numbers', () => {
-    const result = simpleCalculator({ a: 3, b: 2, action: Action.Substract });
+    const result = simpleCalculator({ a: 3, b: 2, action: Action.Subtract });
     expect(result).toBe(1);
   });
 
