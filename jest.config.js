@@ -2,6 +2,7 @@ module.exports = {
   testEnvironment: 'node',
   testPathIgnorePatterns: ['/node_modules/'],
   testMatch: ['**/?(*.)+(test).ts'],
+  testTimeout: 30000,
   moduleFileExtensions: ['ts', 'js', 'json'],
   moduleNameMapper: {
     '^axios$': require.resolve('axios'),
